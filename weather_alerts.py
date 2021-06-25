@@ -31,8 +31,8 @@ def opensocket():
 	websock.close()
 
 	""" 
-  UV Index rules
-  low (1-2)
+  	UV Index rules
+  	low (1-2)
 	moderate (3-5)
 	high (6-7)
 	very high (8-10)
@@ -52,17 +52,17 @@ def opensocket():
 
 
 	#Lets setup some defaults for our alerts
-	a_wind_warning 		  = 15	#Alert if we get wind more than 15kms
-	a_rain_warning 		  = 5		#Alert if we get 5mm or more of rain
+	a_wind_warning 		= 15	#Alert if we get wind more than 15kms
+	a_rain_warning 		= 5	#Alert if we get 5mm or more of rain
 	a_heat_index_high 	= 30	#Alert if the temp gets above 30	
-	a_heat_index_low 	  = 5		#Alert if the temp gets above 30	
-	a_strike_count 		  = 5		#Alert if we get more than 5 lightning strikes in the last hour
-	a_wind_chill 		    = 5		#Alert if the windchill is 5 or lower
-	a_battery 			    = 2		#Alert if battery level drops
-	a_uv 				        = 6		#UV index alert
-	a_radiation 		    = 1380	#This is a normal value
-	a_humidity_high 	  = 98	#High and low values for humidity
-	a_humidity_low 		  = 20	#Low humidity values
+	a_heat_index_low 	= 5	#Alert if the temp gets above 30	
+	a_strike_count 		= 5	#Alert if we get more than 5 lightning strikes in the last hour
+	a_wind_chill 		= 5	#Alert if the windchill is 5 or lower
+	a_battery 		= 2	#Alert if battery level drops
+	a_uv 			= 6	#UV index alert
+	a_radiation 		= 1380	#This is a normal value
+	a_humidity_high 	= 98	#High and low values for humidity
+	a_humidity_low 		= 20	#Low humidity values
 
 	#Define what we want to check
 	WW = 'Wind Warning:'
@@ -76,19 +76,19 @@ def opensocket():
 	HL = 'Low Humidity Warning:'
 
 	#Read the json into variables
-	json_obj 		    = json.loads(temp_rs)
-	rain_lasthour 	= json_obj['summary']['precip_total_1h']
-	wind_chill 		  = json_obj['summary']['wind_chill']
-	feels_like 		  = json_obj['summary']['feels_like']
-	heat_index 		  = json_obj['summary']['heat_index']
-	battery 		    = json_obj['obs'][0][16]
-	uv_index 		    = json_obj['obs'][0][10]
-	humidity 		    = json_obj['obs'][0][8]
-	rain_for_today 	= json_obj['obs'][0][18]
-	lux 			      = json_obj['obs'][0][9]
-	radiation 		  = json_obj['obs'][0][11] 
-	gust 			      = json_obj['obs'][0][3]
-	strike_count 	  = json_obj['obs'][0][15]
+	json_obj 		= json.loads(temp_rs)
+	rain_lasthour 		= json_obj['summary']['precip_total_1h']
+	wind_chill 		= json_obj['summary']['wind_chill']
+	feels_like 		= json_obj['summary']['feels_like']
+	heat_index 		= json_obj['summary']['heat_index']
+	battery 		= json_obj['obs'][0][16]
+	uv_index 		= json_obj['obs'][0][10]
+	humidity 		= json_obj['obs'][0][8]
+	rain_for_today 		= json_obj['obs'][0][18]
+	lux 			= json_obj['obs'][0][9]
+	radiation 		= json_obj['obs'][0][11] 
+	gust 			= json_obj['obs'][0][3]
+	strike_count 	  	= json_obj['obs'][0][15]
 
 	#print out any of the results
 	print('Rain Last Hour:', rain_lasthour)
@@ -113,7 +113,7 @@ def opensocket():
 	with open('lastrun.txt') as f:
 		filecontents = f.read().splitlines()	
 		
-	lastrun 	= open("lastrun.txt", "w")
+	lastrun = open("lastrun.txt", "w")
 
 	if gust >= a_wind_warning and filecontents in WW:
 		msg0 	= WW + str(gust) + "kmh" +	'\n'
@@ -131,7 +131,7 @@ def opensocket():
 	if heat_index <= a_heat_index_low:
 		msg5 	= CW + str(heat_index) + "C" + '\n'
 		lastrun.write(CW)
-	if radiation >= a_radiation:
+	if int(radiation or 0) >=  a_radiation:
 		msg6 	= RA + str(radiation)+ '\n'
 		lastrun.write(RA)
 	if humidity >= a_humidity_high and str(filecontents) in HU:
