@@ -30,7 +30,7 @@ a_HL		 		= 20		#Low humidity values
 #Setup our Lists, the index counts should all match
 NumonicList	= ['WW:','RW:','WC:','BV:','HH:','CW:','RA:','HU:','HL:','UV:']	
 MsgList = ['Wind Warning:','Rain Warning:','Wind Chill Warning:','Battery Voltage Warning:','High Heat Warning:','Cold Warning:','Radiation Warning:','High Humidity Warning:','Low Humidity Warning:', 'High UV Index']		
-Warning = ['km','mm','C','V','C','C','W/m^2','%','%','I']	
+Warning = ['km','mm','C','V','C','C','W/m^2','%','I']	
 Thresholds = [a_WW,a_RW,a_WC,a_BV,a_TH,a_TL,a_RA,a_HH,a_HL, a_UV]
 Operator = ['GT','GT','LT','LT','GT','LT','GT','GT','LT','GT']
 thislist = []
