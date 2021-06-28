@@ -115,7 +115,7 @@ def opensocket():
 				print('Somthing else here')
 
 		if len(messageList) > 0:
-			SendNotification(warnings)
+			SendNotification(msg)
 
 	
 while True:
