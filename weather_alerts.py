@@ -14,18 +14,18 @@ user            = "user_id"
 
 	
 #Lets setup some default thresholds for our alerts
-a_WW		 		= 15	#Alert if we get wind more than 15kms
+a_WW		 		= 15		#Alert if we get wind more than 15kms
 a_RW		 		= 5		#Alert if we get 5mm or more of rain
-a_TH 				= 30	#Alert if the temp gets above 30	
+a_TH 				= 30		#Alert if the temp gets above 30	
 a_TL		 		= 5		#Alert if the temp gets above 30	
 a_SC		 		= 5		#Alert if we get more than 5 lightning strikes in the last hour
 a_WC 				= 5		#Alert if the windchill is 5 or lower
-a_BV	 			= 2 	#Alert if battery level drops
+a_BV	 			= 2 		#Alert if battery level drops
 a_UV 				= 6		#UV index alert
-a_RA		 		= 1380	#This is a normal value
-a_HH			 	= 95	#High and low values for humidity
-a_HL		 		= 20	#Low humidity values
-a_UV		 		= 6		#UV Warning
+a_RA		 		= 1380		#This is a normal value
+a_HH			 	= 95		#High and low values for humidity
+a_HL		 		= 20		#Low humidity values
+
 
 #Setup our Lists, the index counts should all match
 NumonicList	= ['WW:','RW:','WC:','BV:','HH:','CW:','RA:','HU:','HL:','UV:']	
@@ -91,20 +91,19 @@ def opensocket():
 
 
 		#Read the json values into variables
-		json_obj 		= json.loads(temp_rs)
-		
+		json_obj 		= json.loads(temp_rs)		
 		jWW 			= json_obj['obs'][0][3]
 		jRW 			= json_obj['summary']['precip_total_1h']
-		jWC	 			= json_obj['summary']['wind_chill']
-		jFL	 			= json_obj['summary']['feels_like']
+		jWC	 		= json_obj['summary']['wind_chill']
+		jFL	 		= json_obj['summary']['feels_like']
 		jHH 			= json_obj['summary']['heat_index']
 		jBV 			= json_obj['obs'][0][16]
 		jUV 			= int(json_obj['obs'][0][10] or 0)
 		jHU 			= json_obj['obs'][0][8]
-		jRT		 		= json_obj['obs'][0][18]
+		jRT		 	= json_obj['obs'][0][18]
 		jLX 			= int(json_obj['obs'][0][9] or 0)
-		jRA	 			= int(json_obj['obs'][0][11] or 0)
-		jSC		 		= json_obj['obs'][0][15]
+		jRA	 		= int(json_obj['obs'][0][11] or 0)
+		jSC		 	= json_obj['obs'][0][15]
 
 		AlertList	= [jWW,jRW,jWC,jBV,jHH,jHH,jRA,jHU,jHU,jUV]	
 				
