@@ -85,6 +85,8 @@ def opensocket():
 		temp_rs =  websock.recv()
 		websock.send('{"type":"listen_start",' + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
 		temp_rs =  websock.recv()
+		#get the data to process
+		temp_rs =  websock.recv()
 		websock.close()
 
 
