@@ -105,7 +105,7 @@ def opensocket():
 		jRA	 		= int(json_obj['obs'][0][11] or 0)
 		jSC		 	= json_obj['obs'][0][15]
 
-		AlertList	= [jWW,jRW,jWC,jBV,jHH,jHH,jRA,jHU,jHU,jUV]	
+		AlertList	= [jWW,jRW,jWC,jBV,jHH,jHH,jRA,jHU,jUV]	
 				
 		for a, b, c, d, e, f in zip(AlertList, MsgList, Warning, Thresholds, Operator, NumonicList):
 			if e == "GT":
