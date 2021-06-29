@@ -38,6 +38,13 @@ messageList = []
 msg = ""
 mycounter = 0
 
+#Lets check for any nonzero values
+def nonzero(value):
+    if value == None:
+        return 0
+    return value
+	
+	
 #Defiine a function to send a notification, I've also used a warning jpg which you can use your own.
 def SendNotification(Title):
 	try:
@@ -98,11 +105,11 @@ def opensocket():
 		jFL	 		= json_obj['summary']['feels_like']
 		jHH 			= json_obj['summary']['heat_index']
 		jBV 			= json_obj['obs'][0][16]
-		jUV 			= int(json_obj['obs'][0][10] or 0)
+		jUV 			= nonzero(json_obj['obs'][0][10])
 		jHU 			= json_obj['obs'][0][8]
 		jRT		 	= json_obj['obs'][0][18]
-		jLX 			= int(json_obj['obs'][0][9] or 0)
-		jRA	 		= int(json_obj['obs'][0][11] or 0)
+		jLX 			= nonzero(json_obj['obs'][0][9])
+		jRA	 		= nonzero(json_obj['obs'][0][11])
 		jSC		 	= json_obj['obs'][0][15]
 
 		AlertList	= [jWW,jRW,jWC,jBV,jHH,jHH,jRA,jHU,jUV]	
