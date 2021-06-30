@@ -114,7 +114,7 @@ def getAlert(AlertList, Thresholds, Warning, MsgList, NumonicList, operator):
 				messageList.append(counter)
 		elif AlertList >= Thresholds:
 			status = "CLEAR"
-	print("Name:", MsgList, 'AlertList:', AlertList , 'Thresholds:', Thresholds, "Status:", status )			
+	print(MsgList, ' - AlertList:', AlertList , ' - Thresholds:', Thresholds, " - Status:", status )			
 	return messageList		
 
 
@@ -122,7 +122,7 @@ def opensocket():
 		#print('Opening Websocket connection...')
 		websock = create_connection('wss://ws.weatherflow.com/swd/data?api_key=' + personal_token)
 		temp_rs =  websock.recv()
-		websock.send('{"type":"listen_start",'       + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
+		websock.send('{"type":"listen_start",' + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
 		temp_rs =  websock.recv()
 		#Lets process the data
 		temp_rs =  websock.recv()
@@ -165,6 +165,10 @@ def opensocket():
 
 	
 while True:
-	opensocket()
-	print('sleeping')
-	time.sleep(10)
+	try:
+		opensocket()
+		print('sleeping')
+		time.sleep(10)
+	except:
+		print('We have an error... sleep')
+		exit()
