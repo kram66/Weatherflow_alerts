@@ -22,7 +22,7 @@ extreme (11 and above).
 """
 
 		
-#Lets setup some defaults for our alerts
+#Lets setup some defaults for our alerts. Setup your own values here
 a_WW		 		= 15		#Alert if we get wind more than 15kms
 a_RW		 		= 5		#Alert if we get 5mm or more of rain
 a_TH 				= 30		#Alert if the temp gets above 30	
@@ -30,7 +30,7 @@ a_TL		 		= 1		#Alert if the temp gets below 1
 a_SC		 		= 5		#Alert if we get more than 5 lightning strikes in the last hour
 a_WC 				= 5		#Alert if the windchill is 5 or lower
 a_BV	 			= 2 		#Alert if battery level drops
-a_UV 				= 0.3  		#UV index alert
+a_UV 				= 6  		#UV index alert
 a_RA		 		= 1380		#This is a normal value
 #a_HH			 	= 95		#High and low values for humidity
 a_HL		 		= 20		#Low humidity values
