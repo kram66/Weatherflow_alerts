@@ -119,15 +119,19 @@ def getAlert(AlertList, Thresholds, Warning, MsgList, NumonicList, operator):
 	return messageList		
 
 def opensocket():
+	try:
 		#print('Opening Websocket connection...')
 		websock = create_connection('wss://ws.weatherflow.com/swd/data?api_key=' + personal_token)
 		temp_rs =  websock.recv()
-		websock.send('{"type":"listen_start",' + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
+
+
+		#print('Listening to Tempest endpoint...')
+		websock.send('{"type":"listen_start",'       + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
 		temp_rs =  websock.recv()
-		#Lets process the data
+
+		#print('Receiving Tempest data...')
 		temp_rs =  websock.recv()
 		websock.close()
-
 				
 		#Read the json into variables
 		json_obj 		= json.loads(temp_rs)
@@ -136,8 +140,6 @@ def opensocket():
 		jFL	 		= json_obj['summary']['feels_like']
 		jHH 			= json_obj['summary']['heat_index']
 		jBV 			= json_obj['obs'][0][16]
-		#jUV 			= int(json_obj['obs'][0][10] or 0)
-		#int(0 if value is None else value)
 		jUV 			= nonzero(json_obj['obs'][0][10])
 		jHU 			= json_obj['obs'][0][8]
 		jRT		 	= json_obj['obs'][0][18]
@@ -151,7 +153,7 @@ def opensocket():
 		for a, b, c, d, e, f in zip(AlertList, MsgList, Warning, Thresholds, Operator, NumonicList):
 			msg = getAlert(a, d, c, b, f, e)
 
-		
+
 		#Now lets loop through the list and see what alerts we need to send.
 		#We have a warning
 		if len(msg) > 0:
@@ -162,13 +164,11 @@ def opensocket():
 			else:
 				print('send the alert')
 				SendNotification(listToString(msg[1]))
-
+	except:
+		pass
 	
 while True:
-	try:
-		opensocket()
-		print('sleeping')
-		time.sleep(10)
-	except:
-		print('We have an error... sleep')
-		exit()
+	opensocket()
+	print('sleeping')
+	time.sleep(10)
+	
