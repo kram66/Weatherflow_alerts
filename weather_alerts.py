@@ -114,9 +114,9 @@ def getAlert(AlertList, Thresholds, Warning, MsgList, NumonicList, operator):
 				messageList.append(counter)
 		elif AlertList >= Thresholds:
 			status = "CLEAR"
-	print(MsgList, ' - AlertList:', AlertList , ' - Thresholds:', Thresholds, " - Status:", status )			
+	output = "{:<19}Current: {:<12} Thresholds: {:<12} Status: {:<12}".format(MsgList, AlertList, Thresholds, status)
+	print(output)
 	return messageList		
-
 
 def opensocket():
 		#print('Opening Websocket connection...')
