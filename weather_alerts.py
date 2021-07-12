@@ -83,7 +83,6 @@ def increment():
 	return COUNT
 	
 def getAlert(AlertList, Thresholds, Warning, MsgList, NumonicList, operator):
-	
 	#Lets check if we have a warning
 	MyList = [MsgList]
 	if operator == "GT":
@@ -132,17 +131,12 @@ def getAlert(AlertList, Thresholds, Warning, MsgList, NumonicList, operator):
 
 
 def opensocket():
-	#try:
-		#print('Opening Websocket connection...')
+	try:
 		websock = create_connection('wss://ws.weatherflow.com/swd/data?api_key=' + personal_token)
 		temp_rs =  websock.recv()
-
-
-		#print('Listening to Tempest endpoint...')
 		websock.send('{"type":"listen_start",'       + ' "device_id":' + tempest_ID + ',' + ' "id":"Tempest"}')
 		temp_rs =  websock.recv()
 
-		#print('Receiving Tempest data...')
 		temp_rs =  websock.recv()
 		websock.close()
 				
@@ -177,7 +171,8 @@ def opensocket():
 					print('already sent the message')
 			else:
 				WARNING = "CLEAR"
-
+	except:
+		pass
 	
 while True:
 	opensocket()
